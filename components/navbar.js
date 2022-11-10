@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-
 import PropTypes from 'prop-types'
-
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import NavigationLinks from './navigation-links'
 
 const Navbar = (props) => {
@@ -23,7 +22,7 @@ const Navbar = (props) => {
           </div>
           <NavigationLinks rootClassName="rootClassName12"></NavigationLinks>
           <div className="navbar-btn-group">
-            <button className="navbar-button button">Connect wallet...</button>
+              <ConnectButton chainStatus="none" />
           </div>
           <div data-type="BurgerMenu" className="navbar-burger-menu">
             <svg viewBox="0 0 1024 1024" className="navbar-icon">

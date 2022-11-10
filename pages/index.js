@@ -1,10 +1,23 @@
 import React from 'react'
 import Head from 'next/head'
-
 import Navbar from '../components/navbar'
 import Footer from '../components/footer'
-
+import styles from '../styles/Slider.module.css';
+import Image from 'next/image';
+import { useState } from "react";
 const Home = (props) => {
+
+  const [index, setIndex] = useState(0);
+  const handleArrow = (direction) => {
+    if (direction === 'left') {
+      setIndex(index !== 0 ? index - 1 : 3);
+    }
+    if (direction === 'right') {
+      setIndex(index !== 3 ? index + 1 : 0);
+    }
+  }
+  console.log(index);
+
   return (
     <>
       <div className="home-container">
@@ -13,7 +26,31 @@ const Home = (props) => {
           <meta property="og:title" content="BeRies" />
         </Head>
         <Navbar rootClassName="navbar-root-class-name"></Navbar>
-        <main id="slider" className="home-slider"></main>
+        <main id="slider" className="home-slider">
+              <div className={styles.leftArrowContainer} style={{left:0}} onClick={() => handleArrow("left")}>
+                  
+                  <Image src="/assets/arrow.svg" className={styles.arrowl} width={40} height={40} />
+              </div>
+            
+              <div className={styles.wrapper} style={{transform:`translateX(${-100*index}vw)` }}>
+                  <div className={styles.pack1Container}>
+
+                  </div>
+                  <div className={styles.pack2Container}>
+
+                  </div>
+                  <div className={styles.pack3Container}>
+
+                  </div>
+                  <div className={styles.pack4Container}>
+                    
+                  </div>
+              </div>
+
+            <div className={styles.rightArrowContainer} style={{right:0}} onClick={() => handleArrow("right")}>
+            <Image src="/assets/arrow.svg" className={styles.arrowr} width={40} height={40} />
+            </div>
+        </main>
         <section id="how it works" className="home-steps">
           <h1 className="H1">How it works ?</h1>
           <div className="home-steps-container">
@@ -181,7 +218,7 @@ const Home = (props) => {
           .home-container {
             width: 100%;
             display: flex;
-            overflow: auto;
+            
             min-height: 100vh;
             align-items: center;
             flex-direction: column;
@@ -189,14 +226,36 @@ const Home = (props) => {
           }
           .home-slider {
             width: 100%;
-            border: 2px dashed rgba(120, 120, 120, 0.4);
             height: 550px;
             display: flex;
+            overflow: hidden;
             padding: var(--dl-space-space-threeunits);
-            align-items: center;
+            
             flex-direction: column;
             justify-content: center;
             background-color: #0000ff;
+            padding: 0px;
+          }
+          .arrowr{
+            transform: rotate(180deg);
+          }
+          .leftArrowContainer{
+            position: absolute;
+            height: 500px;
+            width: 50px;
+            margin-left: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .rightArrowContainer{
+            position: absolute;
+            height: 500px;
+            width: 40px;
+            margin-right: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           .home-steps {
             width: 100%;
